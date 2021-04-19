@@ -1,6 +1,8 @@
 package ru.job4j.dream.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
 
@@ -17,6 +19,7 @@ import java.util.Properties;
 
 public class PsqlStore implements Store {
 
+    private static final Logger LOG = LoggerFactory.getLogger(PsqlStore.class.getName());
     private final BasicDataSource pool = new BasicDataSource();
 
     private PsqlStore() {
@@ -65,7 +68,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
         return posts;
     }
@@ -93,7 +96,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
         return post;
     }
@@ -107,27 +110,27 @@ public class PsqlStore implements Store {
             ps.setInt(2, post.getId());
             ps.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
     }
 
     @Override
     public Post findPostById(int id) {
-        Post post = new Post();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      "SELECT * FROM post WHERE id = ?")) {
             ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
                 if (resultSet.next()) {
-                    post.setId(resultSet.getInt("id"));
-                    post.setName(resultSet.getString("name"));
+                    return new Post(
+                    resultSet.getInt("id"),
+                    resultSet.getString("name"));
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
-        return post;
+        return null;
     }
 
     @Override
@@ -145,7 +148,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
         return candidates;
     }
@@ -173,7 +176,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
         return candidate;
     }
@@ -187,26 +190,26 @@ public class PsqlStore implements Store {
             ps.setInt(2, candidate.getId());
             ps.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
     }
 
     @Override
     public Candidate findCandidateById(int id) {
-        Candidate candidate = new Candidate();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      "SELECT * FROM candidate WHERE id = ?")) {
             ps.setInt(1, id);
-            try (ResultSet resultSet = ps.executeQuery()) {
-                if (resultSet.next()) {
-                    candidate.setId(resultSet.getInt("id"));
-                    candidate.setName(resultSet.getString("name"));
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Candidate(
+                    rs.getInt("id"),
+                    rs.getString("name"));
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
-        return candidate;
+        return null;
     }
 }
