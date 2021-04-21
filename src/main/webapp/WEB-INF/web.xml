@@ -36,4 +36,12 @@
         <servlet-name>AuthServlet</servlet-name>
         <url-pattern>/auth.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EditPostServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.EditPostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditPostServlet</servlet-name>
+        <url-pattern>/editpost.do</url-pattern>
+    </servlet-mapping>
 </web-app>
