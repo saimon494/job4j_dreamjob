@@ -25,6 +25,11 @@
 </head>
 <body>
 <div class="container pt-3">
+    <c:if test="${not empty error}">
+        <div class="alert alert-warning" role="alert">
+            <c:out value="${error}"/>
+        </div>
+    </c:if>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
@@ -41,11 +46,22 @@
                         <input type="text" class="form-control" name="password">
                     </div>
                     <button type="submit" class="btn btn-primary">Войти</button>
-                    <c:if test="${not empty error}">
-                        <div class="alert alert-danger mt-4" role="alert">
-                            <c:out value="${error}"/>
-                        </div>
-                    </c:if>
+<%--                    <c:choose>--%>
+<%--                        <c:when test="${empty error}">--%>
+<%--                            <div style="color:blue; font-weight: bold; margin: 30px 0;">--%>
+<%--                                <div class="alert alert-warning" role="alert">--%>
+<%--                                    <c:out value="Login success!"/>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </c:when>--%>
+<%--                        <c:when test="${not empty error}">--%>
+<%--                            <div style="color:red; font-weight: bold; margin: 30px 0;">--%>
+<%--                                <div class="alert alert-warning" role="alert">--%>
+<%--                                    <c:out value="${error}"/>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </c:when>--%>
+<%--                    </c:choose>--%>
                 </form>
             </div>
         </div>
@@ -60,5 +76,10 @@
 <%--    </c:if>--%>
 <%--  </div>--%>
 <%--</div>--%>
+<%--<c:if test="${error!=null}">--%>
+<%--    <div class="alert alert-warning" role="alert">--%>
+<%--        <c:out value="${error}"/>--%>
+<%--    </div>--%>
+<%--</c:if>--%>
 </body>
 </html>
