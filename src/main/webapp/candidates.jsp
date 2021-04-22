@@ -25,7 +25,7 @@
 <body>
 <div class="container pt-3">
     <div class="row">
-        <%@ include file="menu.jsp" %>
+        <jsp:include page="menu.jsp"/>
     </div>
     <div class="row pt-3">
         <div class="card" style="width: 100%">
@@ -43,7 +43,7 @@
                     <c:forEach items="${candidates}" var="candidate">
                         <tr>
                             <td>
-                                <a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
+                                <a href='<c:url value="candidate/edit.jsp?id=${candidate.id}"/>'>
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
                                 <c:out value="${candidate.name}"/>

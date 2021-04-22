@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <ul class="nav">
     <li class="nav-item">
         <a class="nav-link" href="<%=request.getContextPath()%>/index.do">Главная</a>
@@ -10,7 +11,7 @@
         <a class="nav-link" href="<%=request.getContextPath()%>/candidates.do">Кандидаты</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath()%>/editpost.do">Добавить вакансию</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
