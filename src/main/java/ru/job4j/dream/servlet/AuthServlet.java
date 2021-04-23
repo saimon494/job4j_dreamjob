@@ -1,6 +1,5 @@
 package ru.job4j.dream.servlet;
 
-import org.apache.log4j.Logger;
 import ru.job4j.dream.model.User;
 
 import javax.servlet.ServletException;
@@ -11,8 +10,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class AuthServlet extends HttpServlet {
-
-    private final Logger LOG = Logger.getLogger(this.getClass().getName());
 
     @Override
     protected void doPost(
@@ -26,11 +23,9 @@ public class AuthServlet extends HttpServlet {
             admin.setName("Admin");
             admin.setEmail(email);
             sc.setAttribute("user", admin);
-            LOG.info("User " + email + " logged in");
             resp.sendRedirect(req.getContextPath() + "/index.do");
         } else {
             req.setAttribute("error", "Не верный email или пароль");
-            LOG.warn("Wrong user");
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }

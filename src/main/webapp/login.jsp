@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -46,40 +46,10 @@
                         <input type="text" class="form-control" name="password">
                     </div>
                     <button type="submit" class="btn btn-primary">Войти</button>
-<%--                    <c:choose>--%>
-<%--                        <c:when test="${empty error}">--%>
-<%--                            <div style="color:blue; font-weight: bold; margin: 30px 0;">--%>
-<%--                                <div class="alert alert-warning" role="alert">--%>
-<%--                                    <c:out value="Login success!"/>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </c:when>--%>
-<%--                        <c:when test="${not empty error}">--%>
-<%--                            <div style="color:red; font-weight: bold; margin: 30px 0;">--%>
-<%--                                <div class="alert alert-warning" role="alert">--%>
-<%--                                    <c:out value="${error}"/>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </c:when>--%>
-<%--                    </c:choose>--%>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<%--<div class="container">--%>
-<%--  <div class="row">--%>
-<%--    <c:if test="${not empty error}">--%>
-<%--      <div style="color:red; font-weight: bold; margin: 30px 0;">--%>
-<%--          ${error}--%>
-<%--      </div>--%>
-<%--    </c:if>--%>
-<%--  </div>--%>
-<%--</div>--%>
-<%--<c:if test="${error!=null}">--%>
-<%--    <div class="alert alert-warning" role="alert">--%>
-<%--        <c:out value="${error}"/>--%>
-<%--    </div>--%>
-<%--</c:if>--%>
 </body>
 </html>
