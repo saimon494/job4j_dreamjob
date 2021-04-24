@@ -28,14 +28,14 @@ public class RegServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         User user = new User(0, name, email, password);
-        PsqlStore.instOf().save(user);
-        if (user.getId() == 0) {
-            req.setAttribute("error", "Ошибка сохранения пользователя");
-            req.getRequestDispatcher("reg.jsp").forward(req, resp);
-        } else {
+        if (PsqlStore.instOf().findUserByEmail(email) == null) {
+            PsqlStore.instOf().save(user);
             HttpSession sc = req.getSession();
             sc.setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/index.do");
+        } else {
+            req.setAttribute("error", "Ошибка сохранения пользователя");
+            req.getRequestDispatcher("reg.jsp").forward(req, resp);
         }
     }
 }
