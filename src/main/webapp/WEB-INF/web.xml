@@ -44,6 +44,22 @@
         <servlet-name>RegServlet</servlet-name>
         <url-pattern>/reg.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>PhotoServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.PhotoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PhotoServlet</servlet-name>
+        <url-pattern>/photo.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    <servlet-name>CandidateDeleteServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.CandidateDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CandidateDeleteServlet</servlet-name>
+        <url-pattern>/candidate/delete.do</url-pattern>
+    </servlet-mapping>
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>ru.job4j.dream.filter.AuthFilter</filter-class>

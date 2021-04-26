@@ -1,6 +1,7 @@
 package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.Photo;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
@@ -19,6 +20,12 @@ public interface Store {
     void save(Candidate candidate);
 
     Candidate findCandidateById(int id);
+
+    void delete(Candidate candidate);
+
+    void save(Photo photo, int id);
+
+    Photo findPhotoById(int id);
 
     Collection<User> findAllUsers();
 

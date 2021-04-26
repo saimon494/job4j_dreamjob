@@ -1,6 +1,7 @@
 package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.Photo;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
@@ -20,6 +21,9 @@ public class PsqlMain {
         for (Candidate candidate : store.findAllCandidates()) {
             System.out.println(candidate.getId() + " " + candidate.getName());
         }
+        byte[] image = {1, 2, 3};
+        store.save(new Photo(0, image), 1);
+        store.save(new Photo(0, image), 2);
         System.out.println(store.findCandidateById(1));
         System.out.println(store.findCandidateById(2));
         User user1 = new User(0, "Ivan", "email1", "password1");
