@@ -27,6 +27,21 @@
             }
             return false;
         }
+
+        function addRow() {
+            var name = $('#name').val();
+            var surname = $('#surname').val();
+            var gender = $("input[name='gender']:checked").val();
+            var description = $("#description").val();
+            $("#table tr:last").after(
+                "<tr>" +
+                "<td>" + name + "</td>" +
+                "<td>" + surname + "</td>" +
+                "<td>" + gender + "</td>" +
+                "<td>" + description + "</td>" +
+                "</tr>"
+            );
+        }
     </script>
 </head>
 <body>
@@ -43,39 +58,28 @@
             <input type="text" class="form-control" id="surname">
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="male" value="option1" checked>
+            <input class="form-check-input" type="radio" name="gender" id="male" value="Мужчина" checked>
             <label class="form-check-label" for="male">Мужчина</label>
-            <input class="form-check-input" type="radio" id="female" value="option2">
+            <input class="form-check-input" type="radio" name="gender" id="female" value="Женщина">
             <label class="form-check-label" for="female">Женщина</label>
         </div>
         <div class="form-group">
             <label for="description">Описание</label>
             <textarea class="form-control" id="description" rows="3"></textarea>
         </div>
-        <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+        <button type="button" class="btn btn-default" onclick="return validate();">Проверить</button>
+        <button type="button" class="btn btn-default" onclick="return addRow();">Добавить</button>
     </form>
-    <table class="table">
+    <table class="table" id="table">
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Surname</th>
-            <th scope="col">Email</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Пол</th>
+            <th scope="col">Описание</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@email</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@email</td>
-        </tr>
         </tbody>
     </table>
 </div>
