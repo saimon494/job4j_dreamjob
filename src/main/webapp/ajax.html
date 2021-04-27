@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>AJAX</title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script>
+    function sendGreeting() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/dreamjob/greet',
+            data: 'name=' + $('#exampleEmail').val(),
+            dataType: 'text'
+        }).done(function(data) {
+            $(".result").text(data);
+        }).fail(function(err) {
+            alert(err);
+        });
+    }
+</script>
+
+<div class="container pt-3">
+    <form>
+        <div class="text">
+            <p class="result"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleEmail">Email address</label>
+            <input type="email" class="form-control" id="exampleEmail" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="sendGreeting()">Submit</button>
+    </form>
+</div>
+</body>
+</html>
