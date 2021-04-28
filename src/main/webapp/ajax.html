@@ -15,10 +15,10 @@
         $.ajax({
             type: 'GET',
             url: 'http://localhost:8080/dreamjob/greet',
-            data: 'name=' + $('#exampleEmail').val(),
-            dataType: 'text'
+            data: {name: $('#exampleEmail').val()},
+            dataType: 'json'
         }).done(function(data) {
-            $(".result").text(data);
+            $(".result").before(JSON.stringify(data));
         }).fail(function(err) {
             alert(err);
         });
