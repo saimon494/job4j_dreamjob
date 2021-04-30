@@ -36,7 +36,8 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Названия</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Фото</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -47,6 +48,24 @@
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
                                 <c:out value="${candidate.name}"/>
+                            </td>
+                            <td>
+                                <div class="card text-center" style="width: 15rem;">
+                                    <img class="card-img-top" src='<c:url value="/photo.do?id=${candidate.photoId}"/>' alt="Нет фото" width="100px" height="100px">
+                                    <div class="card-body">
+                                        <c:if test="${candidate.photoId == 0}">
+                                            <a href='<c:url value="/candidate/photo.jsp?id=${candidate.id}"/>' class="btn btn-primary">Загрузить</a>
+                                        </c:if>
+                                        <c:if test="${candidate.photoId != 0}">
+                                            <a href='<c:url value="/photo.do?id=${candidate.photoId}"/>' class="btn btn-primary">Скачать</a>
+                                        </c:if>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href='<c:url value="/candidate/delete.do?id=${candidate.id}"/>'>
+                                    <i class="fa fa-trash mr-3"></i>
+                                </a>
                             </td>
                         </tr>
                     </c:forEach>
