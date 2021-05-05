@@ -29,7 +29,7 @@
         <%@ include file="menu.jsp" %>
     </div>
     <c:if test="${not empty error}">
-        <div class="alert alert-warning" role="alert">
+        <div class="alert alert-warning mt-3 mb-0" role="alert">
             <c:out value="${error}"/>
         </div>
     </c:if>

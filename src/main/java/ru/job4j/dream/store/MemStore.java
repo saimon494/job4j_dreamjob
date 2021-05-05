@@ -1,8 +1,6 @@
 package ru.job4j.dream.store;
 
-import ru.job4j.dream.model.Candidate;
-import ru.job4j.dream.model.Post;
-import ru.job4j.dream.model.User;
+import ru.job4j.dream.model.*;
 
 import java.util.Collection;
 import java.util.Map;
@@ -15,9 +13,11 @@ public class MemStore implements Store {
     private static final AtomicInteger POST_ID = new AtomicInteger(4);
     private static final AtomicInteger CANDIDATE_ID = new AtomicInteger(4);
     private final static AtomicInteger USER_ID = new AtomicInteger(0);
+    private final static AtomicInteger PHOTO_ID = new AtomicInteger(0);
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
     private final Map<Integer, User> users = new ConcurrentHashMap<>();
+    private final Map<Integer, Photo> photos = new ConcurrentHashMap<>();
 
     private MemStore() {
         posts.put(1, new Post(1, "Junior Java Job"));
@@ -38,11 +38,6 @@ public class MemStore implements Store {
     }
 
     @Override
-    public Collection<Candidate> findAllCandidates() {
-        return candidates.values();
-    }
-
-    @Override
     public void save(Post post) {
         if (post.getId() == 0) {
             post.setId(POST_ID.incrementAndGet());
@@ -56,6 +51,16 @@ public class MemStore implements Store {
     }
 
     @Override
+    public void delete(Post post) {
+        posts.remove(post.getId());
+    }
+
+    @Override
+    public Collection<Candidate> findAllCandidates() {
+        return candidates.values();
+    }
+
+    @Override
     public void save(Candidate candidate) {
         if (candidate.getId() == 0) {
             candidate.setId(CANDIDATE_ID.incrementAndGet());
@@ -66,6 +71,11 @@ public class MemStore implements Store {
     @Override
     public Candidate findCandidateById(int id) {
         return candidates.get(id);
+    }
+
+    @Override
+    public void delete(Candidate candidate) {
+        candidates.remove(candidate.getId());
     }
 
     @Override
@@ -93,6 +103,24 @@ public class MemStore implements Store {
                 return user;
             }
         }
+        return null;
+    }
+
+    @Override
+    public void save(Photo photo, int id) {
+        if (photo.getId() == 0) {
+            photo.setId(PHOTO_ID.incrementAndGet());
+        }
+        photos.put(photo.getId(), photo);
+    }
+
+    @Override
+    public Photo findPhotoById(int id) {
+        return photos.get(id);
+    }
+
+    @Override
+    public Collection<City> findAllCities() {
         return null;
     }
 }

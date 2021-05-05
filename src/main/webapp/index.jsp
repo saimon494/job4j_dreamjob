@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,7 +19,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-
     <title>Работа мечты</title>
 </head>
 <body>
@@ -32,6 +32,22 @@
                 Сегодняшние вакансии
             </div>
             <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" style="width:25%">Название</th>
+                        <th scope="col" style="width:75%">Описание</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${posts}" var="post">
+                        <tr>
+                            <td><c:out value="${post.name}"/></td>
+                            <td><c:out value="${post.description}"/></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -41,6 +57,33 @@
                 Сегодняшние кандидаты
             </div>
             <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" style="width:20%">Имя</th>
+                        <th scope="col" style="width:30%">Фото</th>
+                        <th scope="col" style="width:30%">Город</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${candidates}" var="candidate">
+                        <tr>
+                            <td><c:out value="${candidate.name}"/></td>
+                            <td>
+                                <img src='<c:url value="/photo.do?id=${candidate.photoId}"/>'
+                                     width="100" height="auto" alt="Фото кандидата">
+                            </td>
+                            <td>
+                                <c:forEach items="${cities}" var="city">
+                                    <c:if test="${candidate.cityId eq city.id}">
+                                        <c:out value="${city.name}"/>
+                                    </c:if>
+                                </c:forEach>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

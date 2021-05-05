@@ -4,6 +4,7 @@
 
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
+
     <servlet>
         <servlet-name>PostServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.PostServlet</servlet-class>
@@ -13,6 +14,15 @@
         <url-pattern>/posts.do</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>PostDeleteServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.PostDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostDeleteServlet</servlet-name>
+        <url-pattern>/post/delete.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>CandidateServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.CandidateServlet</servlet-class>
     </servlet>
@@ -21,6 +31,24 @@
         <url-pattern>/candidates.do</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>CandidateDeleteServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.CandidateDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CandidateDeleteServlet</servlet-name>
+        <url-pattern>/candidate/delete.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CityServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.CityServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CityServlet</servlet-name>
+        <url-pattern>/cities</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>IndexServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.IndexServlet</servlet-class>
     </servlet>
@@ -28,6 +56,7 @@
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index.do</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>AuthServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.AuthServlet</servlet-class>
@@ -36,6 +65,7 @@
         <servlet-name>AuthServlet</servlet-name>
         <url-pattern>/auth.do</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>RegServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.RegServlet</servlet-class>
@@ -44,6 +74,7 @@
         <servlet-name>RegServlet</servlet-name>
         <url-pattern>/reg.do</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>PhotoServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.PhotoServlet</servlet-class>
@@ -52,14 +83,7 @@
         <servlet-name>PhotoServlet</servlet-name>
         <url-pattern>/photo.do</url-pattern>
     </servlet-mapping>
-    <servlet>
-    <servlet-name>CandidateDeleteServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.CandidateDeleteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CandidateDeleteServlet</servlet-name>
-        <url-pattern>/candidate/delete.do</url-pattern>
-    </servlet-mapping>
+
     <servlet>
         <servlet-name>GreetingServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.GreetingServlet</servlet-class>
@@ -68,6 +92,7 @@
         <servlet-name>GreetingServlet</servlet-name>
         <url-pattern>/greet</url-pattern>
     </servlet-mapping>
+
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>ru.job4j.dream.filter.AuthFilter</filter-class>

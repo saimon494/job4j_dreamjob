@@ -33,25 +33,24 @@
                 Кандидаты
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Фото</th>
+                        <th scope="col" style="width:20%">Имя</th>
+                        <th scope="col" style="width:30%">Фото</th>
+                        <th scope="col" style="width:30%">Город</th>
+                        <th scope="col" style="width:5%"></th>
+                        <th scope="col" style="width:5%"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${candidates}" var="candidate">
                         <tr>
+                            <td><c:out value="${candidate.name}"/></td>
                             <td>
-                                <a href='<c:url value="candidate/edit.jsp?id=${candidate.id}"/>'>
-                                    <i class="fa fa-edit mr-3"></i>
-                                </a>
-                                <c:out value="${candidate.name}"/>
-                            </td>
-                            <td>
-                                <div class="card text-center" style="width: 15rem;">
-                                    <img class="card-img-top" src='<c:url value="/photo.do?id=${candidate.photoId}"/>' alt="Нет фото" width="100px" height="100px">
+                                <div class="card text-center" style="width: 100%">
+                                    <img class="card-img-top" src='<c:url value="/photo.do?id=${candidate.photoId}"/>'
+                                         alt="Нет фото" width="100" height="auto">
                                     <div class="card-body">
                                         <c:if test="${candidate.photoId == 0}">
                                             <a href='<c:url value="/candidate/photo.jsp?id=${candidate.id}"/>' class="btn btn-primary">Загрузить</a>
@@ -63,7 +62,21 @@
                                 </div>
                             </td>
                             <td>
-                                <a href='<c:url value="/candidate/delete.do?id=${candidate.id}"/>'>
+                                <c:forEach items="${cities}" var="city">
+                                    <c:if test="${candidate.cityId eq city.id}">
+                                        <c:out value="${city.name}"/>
+                                    </c:if>
+                                </c:forEach>
+                            </td>
+                            <td>
+                                <a href='<c:url value="candidate/edit.jsp?id=${candidate.id}"/>'
+                                   title="Редактирование кандидата">
+                                    <i class="fa fa-edit mr-3"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href='<c:url value="/candidate/delete.do?id=${candidate.id}"/>'
+                                   title="Удаление кандидата">
                                     <i class="fa fa-trash mr-3"></i>
                                 </a>
                             </td>
