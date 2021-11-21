@@ -1,12 +1,92 @@
-# Проект Dream job
+# Проект - Dream job
+
 [![Build Status](https://travis-ci.com/saimon494/job4j_dreamjob.svg?branch=main)](https://travis-ci.com/saimon494/job4j_dreamjob)
 
-![Авторизация](https://github.com/saimon494/job4j_dreamjob/blob/main/images/1%20enter.png)
-![Неверные данные](https://github.com/saimon494/job4j_dreamjob/blob/main/images/1-1%20enter.png)
-![Регистрация](https://github.com/saimon494/job4j_dreamjob/blob/main/images/2%20reg.png)
-![Главная](https://github.com/saimon494/job4j_dreamjob/blob/main/images/3%20index.png)
-![Вакансии](https://github.com/saimon494/job4j_dreamjob/blob/main/images/4%20post.png)
-![Кандидаты](https://github.com/saimon494/job4j_dreamjob/blob/main/images/5%20can.png)
-![Добавить вакансию](https://github.com/saimon494/job4j_dreamjob/blob/main/images/6%20add%20post.png)
-![Добавить кандидата](https://github.com/saimon494/job4j_dreamjob/blob/main/images/7%20add%20can.png)
-![Загрузить фото](https://github.com/saimon494/job4j_dreamjob/blob/main/images/8%20photo.png)
+## О проекте
+
+* Приложение представляет собой биржу работы с web-интерфейсом:
+  ![Главная](images/about/index.png)<br>
+* Пользователь может быть как кандидатом так и HR. Кандидаты могут вносить в систему данные о себе:
+  ![Добавить кандидата](images/about/add_can.png)<br>
+* HR могут публиковать вакансии о работе:
+  ![Добавить вакансию](images/about/add_post.png)<br>
+* Проект построен на сервлетах и JSP. Есть 2 слоя: слой контроллеров и слой по работе с БД PostgreSQL 
+(реализован на JDBC, также есть возможность хранить данные в памяти с помощью класса MemStore).
+* В проекте используется шаблон MVC. Все виды открываются через GET-методы сервлетов, 
+что позволяет отправлять необходимые данные на виды, представленные JSP-страницами.
+* Для реализации логики отображения на JSP-страницах используются Scriplets и JSTL.
+* JSP-страницы реализованы на HTML и Bootstrap.
+* Реализована возможность добавления фото для кандидата, которое после добавления можно также скачать:
+  ![Добавить фото](images/about/photo.png)<br>
+* Только авторизованные пользователи могут просматривать списки вакансий и кандидатов,
+  а также добавлять новые вакансии и кандидатов. Авторизация построена на основе фильтра (класс AuthFilter)
+  и сервлета, выполняющего проверку пароля на соответствие данным из БД (класс AuthServlet). Все зарегистрированные пользователи
+  хранятся в БД. Форма авторизации:
+  ![Авторизация](images/about/auth.png)<br>
+* Есть возможность регистрации новых пользователей. Данная функция реализуется сервлетом RegServlet,
+  который сохраняет новых пользователей в БД. Форма регистрации:
+  ![Регистрации](images/about/reg.png)<br>
+* В качестве системы логирования используется связка log4j и slf4j.
+* Для работы с JSON-форматом используется библиотека GSON.
+* Пул соединений к БД основан на Apache Commons DBCP.
+* Для отображения авторизованного пользователя на всех страницах используется объект Session.
+* С помощью JS и JQuery сделана валидация всех форм приложения:
+  ![Валидация](images/about/valid.png)<br>
+* Для отображения списка городов на странице добавления и редактирования кандидатов используется технология AJAX
+  (посылается AJAX-запрос с помощью JQuery на сервлет CityServlet):
+  ![Список городов](images/about/cities.png)
+ 
+## Сборка
+
+Для сборки проекта необходимо:
+1. Установить JDK 14.
+2. Установить Maven.
+3. Установить сервер БД PostgreSQL, задать логин - *postgres*, пароль - *password*.
+4. Установить Tomcat.
+5. Скачать исходный код проекта.
+6. Перейти в корень проекта, где лежит файл `pom.xml`.
+7. Собрать проект командой `mvn -DskipTests=true package`.
+   При успешной сборке должна появиться папка target c `dreamjob-2.war`.
+8. Переименовать war-архив в `dreamjob.war`.
+9. Создать в pg_Admin БД *dreamjob*.
+10. Открыть Query Tool для созданной БД и запустить SQL-скрипт `schema.sql`,
+    находящийся в папке `db`:
+    ![schema.sql](images/build/query.png)<br>
+11. Скопировать `dreamjob.war` в папку `webapps` Tomcat:  
+    ![dreamjob.war](images/build/deploy1.png)<br>
+12. Скопировать файл `db.properties` в папку `bin` Tomcat:  
+    ![db.properties](images/build/deploy2.png)
+
+## Использование
+
+Запускаем Tomcat с помощью `startup.bat` из папки `bin` Tomcat.  
+Переходим на главную [страницу](http://localhost:8080/dreamjob/) приложения:
+![Главная](images/usage/index.png)
+
+Зарегистрируемся:
+![Регистрация](images/usage/reg2.png)
+
+Авторизуемся:
+![Авторизация](images/usage/auth2.png)
+
+Добавим вакансию:
+![Добавление вакансии 1](images/usage/post2.png)
+![Добавление вакансии 2](images/usage/post3.png)
+
+Отредактируем добавленную вакансию:
+![Редактирование вакансии 1](images/usage/post_edit.png)
+![Редактирование вакансии 2](images/usage/post4.png)
+
+Добавим кандидата:
+![Добавление кандидата 1](images/usage/add_can2.png)
+![Добавление кандидата 2](images/usage/add_can3.png)
+
+Добавим фото:
+![Добавление фото 1](images/usage/add_photo.png)
+![Добавление фото 2](images/usage/add_photo2.png)
+
+Проверим, что информация на главной странице обновилась:
+![Главная](images/usage/index2.png)
+
+## Контакты
+[![Telegram](https://img.shields.io/badge/Telegram-blue?logo=telegram)](https://t.me/Saimon494)
